@@ -2,12 +2,14 @@
 *.pyc
 __pycache__/
 
-# Virtual environment #
-venv/
-env/
-
 # Django #
 *.sqlite3
 /media/
 /staticfiles/
 /static/
+.env
+.DS_Store
+
+# Environment #
+venv/
+env/
