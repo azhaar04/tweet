@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8 px-4">
+    <!-- Profile Header -->
+    <div class="bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
+        <!-- Profile Picture -->
+        <div class="relative">
+            <img class="w-32 h-32 rounded-full object-cover border-4 border-blue-500" src="{{ user.profile_image.url }}" alt="Profile Picture">
+        </div>
+
+        <!-- User Info -->
+        <div class="mt-4 text-center">
+            <h1 class="text-3xl font-bold text-gray-800">{{ user.username }}</h1>
+            <p class="text-gray-600 mt-2">{{ user.email }}</p>
+            <p class="text-gray-500 mt-1">{{ user.bio }}</p>
+        </div>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="mt-8 bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Profile Details</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Detail Item -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-700">Full Name</h3>
+                <p class="text-gray-600 mt-1">{{ user.first_name }} {{ user.last_name }}</p>
+            </div>
+            <!-- Detail Item -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-700">Date of Birth</h3>
+                <p class="text-gray-600 mt-1">{{ user.birth_date }}</p>
+            </div>
+            <!-- Detail Item -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-700">Location</h3>
+                <p class="text-gray-600 mt-1">{{ user.location }}</p>
+            </div>
+            <!-- Gender Item -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-700">Gender</h3>
+                <p class="text-gray-600 mt-1">{{ user.gender }}</p>
+            </div>
+            <!-- Detail Item -->
+            <div>
+                <h3 class="text-lg font-medium text-gray-700">Joined</h3>
+                <p class="text-gray-600 mt-1">{{ user.date_joined }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Profile Button -->
+    <div class="mt-8 text-center">
+        <a href="{% url 'profile_edit' user.id %}" class="bg-blue-500 text-white font-medium px-6 py-3 rounded-md shadow-md hover:bg-blue-600 transition duration-300">
+            Edit Profile
+        </a>
+    </div>
+</div>
+{% endblock %}

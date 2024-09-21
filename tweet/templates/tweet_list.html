@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Tweet List
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Latest Tweets</h1>
+
+    <!-- Tweet cards container -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for tweet in tweets %}
+        <!-- Tweet card -->
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col">
+            <!-- Tweet image -->
+            {% if tweet.photo %}
+            <img class="w-full h-48 object-cover" src="{{ tweet.photo.url }}" alt="Tweet Image">
+            {% else %}
+            <div class="w-full h-48 bg-gray-300 flex items-center justify-center text-gray-500">
+                No Image
+            </div>
+            {% endif %}
+
+            <!-- Tweet content -->
+            <div class="p-4 flex-grow">
+                <h5 class="text-lg font-semibold text-gray-800">{{ tweet.user.username }}</h5>
+                <p class="text-gray-600 mt-2">
+                    {{ tweet.text|truncatewords:15 }}
+                </p>
+            </div>
+
+            <!-- Edit and Delete buttons (only for the tweet owner) -->
+            {% if tweet.user == user %}
+            <div class="p-4 border-t border-gray-200 flex justify-end space-x-4">
+                <a href="{% url 'tweet_edit' tweet.id %}" class="bg-blue-500 text-white font-medium px-4 py-2 rounded-md shadow-sm hover:bg-blue-600 hover:shadow-md transition duration-200 ease-in-out">
+                    Edit
+                </a>
+                <a href="{% url 'tweet_delete' tweet.id %}" class="bg-red-500 text-white font-medium px-4 py-2 rounded-md shadow-sm hover:bg-red-600 hover:shadow-md transition duration-200 ease-in-out">
+                    Delete
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- If no tweets are available -->
+    {% if not tweets %}
+    <p class="text-center text-gray-500 mt-12">No tweets available.</p>
+    {% endif %}
+</div>
+
+
+{% endblock %}

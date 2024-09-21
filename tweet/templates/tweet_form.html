@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {% if form.instance.pk %}
+  Edit Tweet
+  {% else %}
+  Create Tweet
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center">  <!-- Removed bg-gray-100 -->
+    <div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg w-full sm:w-3/4 lg:w-1/2">
+        <h1 class="text-2xl font-bold mb-6 text-gray-800 flex justify-center">
+            {% if form.instance.pk %}
+            Edit Tweet
+            {% else %}
+            Create Tweet
+            {% endif %}
+        </h1>
+
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            
+            <!-- Display form fields with Tailwind styling -->
+            <div class="flex flex-col space-y-4">
+                {{ form.as_p }}
+            </div>
+
+            <!-- Submit button in the center -->
+            <div class="flex justify-center">
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+                    Submit
+                </button>
+            </div>
+        </form>
+
+        <!-- Back to tweet list link centered below the form -->
+        <div class="flex justify-center mt-4">
+            <a href="{% url 'tweet_list' %}" class="text-blue-500 hover:underline">
+                Back to tweet list
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
