@@ -8,8 +8,8 @@ from django.contrib.auth.urls import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('tweet/', include('tweet.urls')),
-     path('users/', include('users.urls')),
+    path('', include('tweet.urls')),
+    path('users/', include('users.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     
     path("__reload__/", include("django_browser_reload.urls")),
